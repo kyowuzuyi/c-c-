@@ -1,0 +1,23 @@
+#include "stdafx.h"
+#include <iostream>
+#include <map>
+#include <numeric>
+#include <algorithm>
+using namespace std;
+int _tmain(int argc, _TCHAR* argv[])
+{
+	map<string, int> b = {
+		{ "red", 1}, // "red"‚ªkeyA1‚ªvalue
+		{ "blue", 2 }
+	};
+	b.insert(map<string, int>::value_type("green", 3));
+	b.insert(map<string, int>::value_type("black", 4));
+	b.insert(map<string, int>::value_type("aaa", 5));
+	for (auto& x : b) {
+		cout << x.first.c_str() <<
+			"," << x.second << endl;
+	}
+	cout << b["red"] << endl;
+	return 0;
+}
+

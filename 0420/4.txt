@@ -1,0 +1,25 @@
+#include "stdafx.h"
+#include <iostream>
+#include <vector>
+#include <numeric>
+#include <algorithm>
+using namespace std;
+int _tmain(int argc, _TCHAR* argv[])
+{
+	vector<float> v = { 1, 6, 3, 2 };
+	float x;
+	cout << "find x:"; cin >> x;
+
+	auto p = find(v.cbegin(), v.cend(), x);
+	if (p != v.cend()) cout << "found!\n";
+	else cout << "not found\n";
+
+	// ŒŸõðŒ‚Éƒ‰ƒ€ƒ_ŠÖ”‚ðŽg‚Á‚½—ác++11
+	p = find_if(v.cbegin(), v.cend(),
+		[x](float n) {return n > x; });
+	if (p != v.cend()) cout << "found!\n";
+	else cout << "not found\n";
+
+	return 0;
+}
+

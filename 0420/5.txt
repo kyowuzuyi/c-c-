@@ -1,0 +1,28 @@
+#include "stdafx.h"
+#include <iostream>
+#include <vector>
+#include <numeric>
+#include <algorithm>
+using namespace std;
+int _tmain(int argc, _TCHAR* argv[])
+{
+	vector<float> v = { 1, 6, 3, 2 };
+	float x;
+	cout << "x:"; cin >> x;
+
+	// 検索条件にラムダ関数を使った例c++11
+
+	// [x](float n) {return n > x; } がラムダ関数
+	// [ ] ラムダ関数外の変数は使えない
+	// [x] xをコピーして渡す
+	// [&] すべて参照渡し
+	// [=] すべてコピー
+	// [ ,] ,で区切って個別指定できる
+	auto p = find_if(v.cbegin(), v.cend(),
+		[&](float n) {return n > x; });
+	if (p != v.cend()) cout << "match!\n";
+	else cout << "not match\n";
+
+	return 0;
+}
+

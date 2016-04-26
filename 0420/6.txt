@@ -1,0 +1,23 @@
+#include "stdafx.h"
+#include <iostream>
+#include <vector>
+#include <numeric>
+#include <algorithm>
+using namespace std;
+int _tmain(int argc, _TCHAR* argv[])
+{
+	vector<float> v = { 1, 6, 3, 2 };
+	float x;
+	cout << "x:"; cin >> x;
+
+	// Q2  x 以下の数がvに存在するかどうかの判定
+	// ヒント サーバの 5.txt
+
+	auto p = find_if(v.cbegin(), v.cend(),
+		[x](float n) {return n <= x; });
+	if (p != v.cend()) cout << "match!\n";
+	else cout << "not match\n";
+
+	return 0;
+}
+

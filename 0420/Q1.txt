@@ -1,0 +1,32 @@
+問題１
+
+合計を求める問題を作成してください。
+ただし、入力数は事前にはわからないものとします。
+
+#include "stdafx.h"
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	vector<float> v;
+	float x;
+	int n;
+	cout << "element num:"; cin >> n;
+	do
+	{
+		cout << "x:"; cin >> x;
+		v.push_back(x);
+	} while (--n);
+	
+	float sum = 0;
+	for (auto x : v)
+	{
+		sum += x;
+	}
+	cout << sum << endl;
+
+	return 0;
+}
+
