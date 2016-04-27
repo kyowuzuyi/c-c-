@@ -1,0 +1,23 @@
+
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+double deg2rad(double deg){
+	return deg / 180.0*3.141592;
+}
+double rad2deg(double rad) {
+	return rad /3.141592 * 180.0;
+}
+int _tmain(int argc, _TCHAR* argv[])
+{
+	// cos 60度　を求めてみます。
+	double rad = deg2rad(60.0);
+	cout << cos(rad) << endl; // 0.5
+	// cosの値0.5から、角度を求めます。
+	rad = acos(0.5); // 逆三角関数
+	cout << rad2deg(rad) << endl; // 60 とでる
+	return 0;
+}
+
+

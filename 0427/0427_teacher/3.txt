@@ -1,0 +1,35 @@
+
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+// Z軸を回転軸として、反時計回り90度の回転行列
+float m[3][3] = {
+	{ 0, -1, 0 },
+	{ 1,  0, 0 },
+	{ 0,  0, 1 }};
+float v[3] = {1,0,0}; // ｘ軸上の長さ１のベクトル
+float v2[3];
+
+void Mul(float v2[3], float m[3][3], float v[3])
+{
+	for (int i = 0; i < 3; i++)
+	{
+		v2[i] = 0;
+		for (int j = 0; j < 3; j++)
+		{
+			v2[i] += m[i][j] * v[j];
+		}
+	}
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	Mul(v2, m, v);
+	// Z軸を中心に90度回転したので(1,0,0) が (0,1,0)に移る
+	for (int i = 0; i < 3; i++) printf("%8.2f", v2[i]);
+
+	return 0;
+}
+
+

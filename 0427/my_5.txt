@@ -1,0 +1,36 @@
+
+#include "stdafx.h"
+#include <iostream>
+#include <time.h>
+using namespace std;
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	//‚×‚«æ‚ğŒvZ‚·‚éA‰½‚ğg‚¦‚Î‚æ‚¢
+	
+	double x = 10;
+	double y;
+
+	clock_t start = clock();
+
+	for (int i = 0; i < 1000000; i++)
+	{
+		  y = pow(x,2);// 46ms  ms‚Í1000•ª‚Ì1•b
+	    //	y = x*x; //0ms  ‘‚¢
+
+//		y = pow(x,0.5); // 46ms
+	//	y = sqrt(x); //15ms
+
+	}
+
+	clock_t end = clock();
+
+	cout << start << endl;
+
+	cout << end << endl;
+
+	cout << (end - start)<<"ms" << endl;
+
+	return 0;
+}
+

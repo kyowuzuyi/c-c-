@@ -1,0 +1,36 @@
+
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+class Enemy
+{
+public:
+	int hp;
+	Enemy() {
+		cout << "constructor\n";  
+	}
+	Enemy(const Enemy& enemy) { // 自作のコピーコンストラクタ
+		hp = enemy.hp;
+		cout << "copy constructor\n"; 
+	}
+};
+
+void func(Enemy e)
+{
+
+}
+
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	Enemy e; // コンストラクタが起動
+	e.hp = 100;
+	//Enemy e1 = e; // コピーコンストラクタ起動(デフォルトまたは自作)
+	Enemy& e1 = e; // 参照にするとコピーコンストラクタは起動しない
+	cout << e1.hp << endl;
+	e1.hp = 200;
+	cout << e.hp << endl;
+	cout << e1.hp << endl;
+	return 0;
+}
+

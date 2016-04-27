@@ -1,0 +1,24 @@
+
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+float a[2] = { 1, 0};
+float b[2] = { 0, 1};
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	// ベクトルaの絶対値(長さ)
+	float la = sqrt(a[0] * a[0] + a[1] * a[1]);
+	// ベクトルbの絶対値(長さ)
+	float lb = sqrt(b[0] * b[0] + b[1] * b[1]);
+	// ベクトルabの内積
+	float ip = a[0] * b[0] + a[1] * b[1];
+	// ベクトルab間の角度(radian)
+	float theta = acos(ip / (la*lb));
+	cout << theta << endl; // rad. = 1.57..は、90度 
+
+	return 0;
+}
+
+

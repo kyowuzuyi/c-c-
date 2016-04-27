@@ -1,0 +1,56 @@
+// ConsoleApplication1.cpp : コンソール アプリケーションのエントリ ポイントを定義します。
+//
+
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+class Enemy
+{
+public:
+	int hp;
+	int rp;
+	Enemy(){
+		cout << "constructor\n";
+	}
+	
+	Enemy(const Enemy& enemy){//コンストラクタが自作
+		hp = enemy.hp;
+		cout << "copy constructor\n";
+	}
+	
+};
+
+void func(Enemy e){//呼び出じの瞬間にコピーが発生する
+
+}
+
+void func2(Enemy& e){//コピーは発生しない
+	e.hp = 900;
+}
+
+void func3(const Enemy& e){//コピーは発生しない
+//	e.hp = 900;//変更できなくなる
+}
+
+
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	Enemy e; //コンストラクタが起動
+	e.hp = 100;
+
+	//func(e);
+	func2(e);
+
+
+
+	/*
+	Enemy e1 = e;//コピーコンストラクタが起動(デフォルトまたは自作)
+	cout << e1.hp << endl;
+	e.hp = 200;
+	cout << e.hp << endl;
+	*/
+	return 0;
+}
+

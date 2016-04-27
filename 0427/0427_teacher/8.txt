@@ -1,0 +1,19 @@
+
+#include "stdafx.h"
+#include <iostream>
+#include <ctime>     // for clock() time.h‚Ì‘ã‚í‚è
+using namespace std;
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	while (true)
+	{
+		// ƒQ[ƒ€‚ªn‚Ü‚Á‚Ä‚©‚ç‚ÌŒo‰ßŠÔ ms
+		clock_t start = clock();
+		cout << start/1000 << "s" << endl;
+	}
+
+	return 0;
+}
+
+

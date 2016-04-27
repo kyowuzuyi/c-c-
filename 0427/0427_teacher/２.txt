@@ -1,0 +1,45 @@
+
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+class Enemy
+{
+public:
+	int hp;
+	Enemy() {
+		cout << "constructor\n";  
+	}
+	Enemy(const Enemy& enemy) { // 自作のコピーコンストラクタ
+		hp = enemy.hp;
+		cout << "copy constructor\n"; 
+	}
+};
+
+void func(Enemy e) // 呼び出しの瞬間にコピーが発生する
+{
+}
+
+void func2(Enemy& e) // 呼び元のエイリアスなのでコピーは発生しない
+{
+	e.hp = 900; // 呼び元も変更される(一般論としてはまずい！)
+}
+
+void func3(const Enemy& e)
+{
+	// e.hp = 900; // 変更できなくなる
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	Enemy e; // コンストラクタが起動
+	e.hp = 100;
+
+	func(e); // コピーコンストラクタが起動してしまう。
+
+	func2(e); // 参照なので、コピーコンストラクタは起動しない。
+
+	cout << e.hp << endl;
+
+	return 0;
+}
+

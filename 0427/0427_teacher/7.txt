@@ -1,0 +1,26 @@
+
+#include "stdafx.h"
+#include <iostream>
+#include <time.h>     // for clock()
+using namespace std;
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	// べき乗を計算するとき何を使えばよいか
+	double x = 10;
+	double y;
+	clock_t start = clock();    // スタート時間
+	for (int i = 0; i < 10000000; i++)
+	{
+		//y = pow(x, 2);	    // 二乗 500ms
+		//y = x*x;			// 二乗　23ms
+		//y = pow(x, 0.5);	// 平方根 390ms
+		//y = sqrt(x);		// 平方根 60ms
+	}
+	clock_t end = clock();     // 終了時間
+	cout << (end - start) << "ms" << endl;
+
+	return 0;
+}
+
+
