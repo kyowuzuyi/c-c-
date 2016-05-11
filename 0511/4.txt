@@ -1,0 +1,30 @@
+// ConsoleApplication6.cpp : コンソール アプリケーションのエントリ ポイントを定義します。
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include <thread>	// スレッド用
+#include <mutex>	// スレッド用
+#include <string>
+using namespace std; 
+mutex printMutex_;
+template <class T> void print(T x){
+	lock_guard<mutex> lk(printMutex_);
+	cout << x << endl;
+}
+// 現在のスレッドの処理を明け渡す p.445 yield
+int count_ = 0;
+bool isComputationFinished() { return ++count_ > 10000; }
+void foo() {
+	while (!isComputationFinished()) // チェック10000回までなら
+		this_thread::yield(); // ほかのスレッド(bar)に制御を譲る
+	for (int i = 0; i < 5; i++) print("foo:");
+}
+void bar() {for (int i = 0; i < 5; i++) print("bar:");}
+int _tmain(int argc, _TCHAR* argv[]){
+	thread t1(foo); thread t2(bar);
+	print("-----------");
+	t1.join();	t2.join();
+	return 0;
+}
+

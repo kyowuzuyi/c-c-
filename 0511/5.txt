@@ -1,0 +1,22 @@
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+using namespace std; 
+
+void f1(){ cout << "f1\n"; }
+void f2(){ cout << "f2\n"; }
+float add(float x, float y){ return x + y; }
+float sub(float x, float y){ return x - y; }
+
+int _tmain(int argc, _TCHAR* argv[]){
+	//void(*f)();
+	float(*f)(float x, float y);
+
+	f = add;
+	cout << f(10.0f, 5.0f) << endl;
+	f = sub;
+	cout << f(10.0f, 5.0f) << endl;
+
+	return 0;
+}
+

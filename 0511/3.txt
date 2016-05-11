@@ -1,0 +1,32 @@
+// ConsoleApplication6.cpp : コンソール アプリケーションのエントリ ポイントを定義します。
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include <thread>	// スレッド用
+#include <mutex>	// スレッド用
+#include <string>
+using namespace std; 
+mutex printMutex_;
+template <class T> // string以外も表示できるようテンプレートに改良
+void print(T x){
+	lock_guard<mutex> lk(printMutex_);
+	cout << x << endl;
+}
+void foo() {
+	for (int i = 0; i < 100000; i++);
+	for (int i = 0; i < 5; i++) print("foo:"); 
+}
+void bar() {
+	for (int i = 0; i < 100000; i++);
+	for (int i = 0; i < 5; i++) print("bar:");
+}
+int _tmain(int argc, _TCHAR* argv[]){
+	thread t1(foo);
+	thread t2(bar);
+	print("-----------");
+	t1.join();
+	t2.join();
+	return 0;
+}
+

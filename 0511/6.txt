@@ -1,0 +1,35 @@
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+using namespace std; 
+
+class State {
+public:
+	virtual void Show()=0;
+};
+class StateA : public State {
+public:
+	void Show() { cout << "StateA\n"; }
+	static StateA* getInstance() // singleton(‚P‚Â‚ÌŽÀ‘Ì)
+	{
+		static StateA s;
+		return &s;
+	}
+};
+class StateB : public State {
+public:
+	void Show() { cout << "StateB\n"; }
+	static StateB* getInstance() // singleton(‚P‚Â‚ÌŽÀ‘Ì)
+	{
+		static StateB s;
+		return &s;
+	}
+};
+int _tmain(int argc, _TCHAR* argv[]){
+	State* state;
+	state = StateA::getInstance();
+	state->Show();
+	state = StateB::getInstance();
+	state->Show();
+	return 0;
+}
