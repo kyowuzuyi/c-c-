@@ -1,0 +1,35 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+// wiki C++でのSingletonの書き方(C++11以前)
+class Singleton {
+private:
+	Singleton(){}					//コンストラクタを private に置く
+	Singleton(const Singleton&);			//コピーコンストラクタも private に置き、定義しない
+	Singleton& operator=(const Singleton&);		//コピー代入演算子も private に置き、定義しない
+	~Singleton(){}					//デストラクタを private に置く
+
+public:
+	int x;
+	static Singleton& getInstance(){
+		static Singleton inst;
+		return inst;
+	}
+	const char* getString(){
+		return "Hello world!";		//Singleton::getInstance().getString(); と記述
+	}
+};
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+
+	Singleton& s1 = Singleton::getInstance();
+	s1.x = 100;
+
+	Singleton& s2 = Singleton::getInstance();
+	s2.x = 99;
+
+	cout << s1.x << endl; // s1とs2は同じもの
+
+	return 0;
+}
