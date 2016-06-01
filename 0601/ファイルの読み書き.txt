@@ -1,0 +1,34 @@
+#include "stdafx.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int _tmain(int argc, _TCHAR* argv[]){
+	// 書き込み
+	//ofstream ofs("sample.txt");
+	ofstream ofs("sample.txt", std::ios_base::app); // appendモード fopenのa
+	ofs << "test1" << endl;
+	ofs.close();	// クローズを入れないと、書き込みが確定しない
+	// 読み込み
+	ifstream ifs("sample.txt");
+	ifs.exceptions(std::ios::eofbit | std::ios::failbit | std::ios::badbit);
+	if (ifs) { // openが成功したら
+		string s;
+		try {
+			while (true){
+				ifs >> s;		// 入力しようとしてエラーが発生したらcatch
+				cout << s << endl;
+			}
+		}
+		catch (exception& e){
+			cerr << e.what() << endl;
+		}
+		ifs.close(); // クローズを入れる
+	} else {
+		cerr << "ファイルオープンに失敗しました" << endl;
+	}
+
+	return 0;
+}
+

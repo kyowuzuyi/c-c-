@@ -1,0 +1,29 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+void g() {	// ここで、例外処理をスローする
+	throw runtime_error("error"); // 自分がスローする
+}
+void f() {
+	try {
+		g();	// 例外処理がスローされるはず
+	} catch (runtime_error& e) { // g()で発生した例外処理をキャッチする
+		cerr << e.what() << endl;
+		throw;	// 例外処理を再スロー(プログラムは中止されるか、上位のtryでcatchされる)
+	} catch (exception& e) {
+		cerr << "exceptionを継承した例外処理をキャッチ" << endl;
+	} catch (...) {
+		cerr << "何らかの例外処理をキャッチ" << endl;
+	}
+}
+int _tmain(int argc, _TCHAR* argv[]){
+	try {
+		f();
+	}
+	catch (exception& e)
+	{
+		cerr << "main:" << e.what() << endl;
+	}
+	return 0;
+}
+

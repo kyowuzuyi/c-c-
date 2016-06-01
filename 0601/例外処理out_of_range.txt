@@ -1,0 +1,26 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+void f(){
+	const int size = 3;
+	int ar[size] = {1,2,3};
+	for (int i = 0; i <= size; i++) // i<=size‚ªŠÔˆá‚Á‚Ä‚¢‚é
+	{
+		if (i < 0 || i >= size){
+			throw out_of_range("out of range");
+		}
+		cout << ar[i] << endl;
+	}
+}
+int _tmain(int argc, _TCHAR* argv[]){
+	try {
+		f();
+	}
+	catch (exception& e)
+	{
+		cerr << "main:" << e.what() << endl;
+	}
+	return 0;
+}
+
