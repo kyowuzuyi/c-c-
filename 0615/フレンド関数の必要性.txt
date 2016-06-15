@@ -1,0 +1,27 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+// 演算子オーバーロード（関数オーバーロードとは異なる）
+class Vector2 {
+public:
+	float x, y;
+	Vector2 operator * (float a) {
+		Vector2 v;
+		v.x = this->x * a;
+		v.y = this->y * a;
+		return v;
+	}
+	void show();
+};
+void Vector2::show() { cout << x << " " << y << endl; }
+int _tmain(int argc, _TCHAR* argv[]){
+	Vector2 p1 = { 10, 20 };
+	// できるスカラー積   p1*2 --> p1.x*2, p1.y*2 になる
+	// できないスカラー積   2*p1 --> 2*p1.x, 2*p1.y になる
+	Vector2 p2 = p1 * 2;	// * が演算子関数、2が引数
+	// Vector2 p2 = 2*p1; // できない
+	p1.show();
+	p2.show();
+	return 0;
+}
+

@@ -1,0 +1,96 @@
+//
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+class Vector2
+{
+public:
+	float x, y;
+	friend Vector2 operator * (float a,Vector2& v);
+	Vector2 operator *(float a,Vector2& v){
+		Vector2 r;
+		r.x = a*v.x;
+		r.y = a.v.y;
+		return r;
+	}
+
+//	Vector2(){};
+//	Vector2(float x, float y): x(x), y(y){}
+//	~Vector2(){}
+
+//vectorの内積を求める
+	float operator ^ (Vector2 op){
+		float v;
+		v = (this->y * op.y) + (this->x * op.x);
+		return v;
+	}
+/*
+単項演算子のオーバーロードであれば、引数を受け取りません
+引数を受け取らないことで、単項演算子をオーバーロードすることができます
+
+type operator ++() {
+//処理;
+}
+ただし、インクリメントやデクリメントには少し特殊な仕様があります
+これだけでは、前置きか後置きを判断することができないのです
+インクリメントやデクリメントには、次のように場所によって優先順位異なっています
+
+++op
+op++
+
+これにこだわらない場合は、++() だけで両方に対処することができます
+しかし、前置きか後置きかが重要なプログラムの場合は分別できると便利です
+オペランドの後に置くインクリメントやデクリメントの場合、次のようにします
+
+type operator ++(int n)
+
+このように、整数型を受け取る型は後置きを表します
+n は型を識別するためのもので、使うことはありません（常に0）
+*/
+
+	void operator ++(int n){
+		++x; ++y;
+	}
+
+	Vector2 operator ++(){
+		++x;
+		++y;
+		return *this;
+	}
+
+	Vector2 operator * (float a){
+		Vector2 v;
+		v.x = this->x * a;
+		v.y = this->y * a;
+		return v;
+	}
+
+
+	void show();
+};
+
+void Vector2::show(){
+	cout << x << " " << y << endl;
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	Vector2 p1 = {1,1};
+	Vector2 p2 = {2,2};
+	p1.show();
+	p2.show();
+
+	Vector2 p3 = p2 * 2;
+	p3.show();
+
+	p1++;
+	p1.show();
+
+	++p2;
+	p2.show();
+
+
+	return 0;
+}
+

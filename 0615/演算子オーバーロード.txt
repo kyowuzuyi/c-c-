@@ -1,0 +1,27 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+// 演算子オーバーロード（関数オーバーロードとは異なる）
+class Vector2 {
+public:
+	float x, y;
+	Vector2() {}
+	Vector2(float x, float y): x(x),y(y) {}
+	~Vector2() {}
+	Vector2 operator + (Vector2 op) {
+		Vector2 v;
+		v.x = this->x + op.x;
+		v.y = this->y + op.y;
+		return v;
+	}
+	void show();
+};
+void Vector2::show() {cout << x << " " << y << endl;}
+int _tmain(int argc, _TCHAR* argv[]){
+	Vector2 p1 = { 1, 1 };Vector2 p2 = { 2, 2 };
+	p1.show();	p2.show();
+	Vector2 p3 = p1 + p2; // 2次元ベクトルの加法を定義したい
+	p3.show();
+	return 0;
+}
+
