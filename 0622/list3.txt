@@ -1,0 +1,89 @@
+#include "stdafx.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+// クラスの応用 再帰的宣言
+// 例：List
+class List
+{
+public:
+	string name;
+	int value;
+	List* next;	// 次のリストへのポインタ
+	List* prev;	// 前のリストへのポインタ
+};
+
+
+void addTail(List* &head, List* &tail, List* &p)
+{
+	p->next = nullptr;
+	if (tail == nullptr) // リストが存在しない
+	{
+		p->prev = nullptr;
+		tail = head = p;	// １つめのリスト
+	}
+	else // すくなくとも１つはリストが存在するとき
+	{
+		p->prev = tail;		// pの直前のリストは直前のtail
+		tail->next = p;		// 直前のtailの次はp
+		tail = p;			// 新しいtail はp
+	}
+}
+
+void dispAll(List* p)
+{
+	while (p != nullptr)
+	{
+		cout << p->value << " " << p->name.c_str() << endl;
+		p = p->next;
+	}
+}
+
+void deleteAll(List* p)
+{
+	while (p != nullptr)
+	{
+		List* prev = p->prev;
+		delete p;
+		p = prev;
+	}
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	string name;
+	int value;
+
+	List* head = nullptr;	// リストの最初（最初は無し）
+	List* tail = nullptr;	// リストの最後（最初は無し）
+
+	try
+	{
+		ifstream ifs("sample.txt");
+		if (ifs) { // openが成功したら
+			ifs.exceptions(std::ios::eofbit | std::ios::failbit | std::ios::badbit);
+			while (!ifs.eof()){
+				ifs >> value >> name;
+				cout << value << " " << name.c_str() << endl;
+
+				List* p = new List();
+				p->name = name; p->value = value;
+				addTail(head, tail, p);
+			}
+			ifs.close(); // クローズを入れる
+		}
+		else {
+			cerr << "ファイルオープンに失敗しました" << endl;
+		}
+	}
+	catch (exception& e){
+		cerr << e.what() << endl;
+	}
+
+	dispAll(head);			// 頭から全部表示
+	deleteAll(tail);		// 後ろから全部削除
+
+	return 0;
+}
+

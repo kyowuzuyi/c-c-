@@ -1,0 +1,115 @@
+// ConsoleApplication1.cpp : コンソール アプリケーションのエントリ ポイントを定義します。
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+class  List
+{
+public:
+	string name;
+	int value;
+	List* next;
+	List* prev;
+};
+
+void dispAll(List* head){
+
+	List* p;
+	p = head;
+
+	while (p != nullptr)
+	{
+		cout << p->value << " " << p->name.c_str() << endl;
+		p = p->next;
+	}
+
+}
+
+void swapAscAll(List* p){
+	while (p != nullptr)
+	{
+		if (p->value > p->next->value){
+			if (p->next != nullptr)
+			{
+
+				if (p->prev != nullptr){
+					p->prev->next = p->next;
+					p->next->prev = p->prev;
+					p->next = p->next->next;
+					p->next->prev = nullptr;
+					p->prev = p->prev->next;
+					p->prev->next->next = p;
+				}
+			}
+		}
+		p = p->next;
+	}
+}
+
+void deleteAll(List* tail){
+	List* p;
+	p = tail;
+	while (p != nullptr)
+	{
+		List* prev = p->prev;
+		delete p;
+		p = prev;
+	}
+
+}
+
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	string name;
+	int value;
+
+	List* head = nullptr;
+	List* tail = nullptr;
+
+	try{
+		ifstream ifs("sample.txt");
+		ifs.exceptions(std::ios::eofbit | std::ios::failbit | std::ios::badbit);
+		if (ifs) { // openが成功したら
+			while (!ifs.eof()){
+				ifs >> value >> name;		// 入力しようとしてエラーが発生したらcatch
+				cout << value << " " << name.c_str() << endl;
+
+				List* p = new List();
+				p->name = name;
+				p->value = value;
+				if (head == nullptr){
+					p->next = tail;
+					p->prev = head;	
+					head->next = p;
+					tail->prev = p;
+				}
+				else{
+					p->next = nullptr;
+					p->prev = tail;
+					tail->next = p;
+					tail = p;
+				}
+			}
+			ifs.close(); // クローズを入れる
+		}
+		else {
+			cerr << "ファイルオープンに失敗しました" << endl;
+		}
+	}
+	catch (exception& e){
+		cerr << e.what() << endl;
+	}
+
+	dispAll(head);
+	swapAscAll(head);
+	dispAll(head);
+	deleteAll(tail);
+
+	return 0;
+}
+

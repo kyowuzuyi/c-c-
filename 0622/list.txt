@@ -1,0 +1,43 @@
+#include "stdafx.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+// クラスの応用 再帰的宣言
+// 例：List
+class List
+{
+public:
+	string name;
+	int value;
+	List* next;	// 次のリストへのポインタ
+	List* prev;	// 前のリストへのポインタ
+};
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	string name;
+	int value;
+
+	try
+	{
+		ifstream ifs("sample.txt");
+		if (ifs) { // openが成功したら
+			ifs.exceptions(std::ios::eofbit | std::ios::failbit | std::ios::badbit);
+			while (!ifs.eof()){
+				ifs >> value >> name;
+				cout << value << " " << name.c_str() << endl;
+			}
+			ifs.close(); // クローズを入れる
+		}
+		else {
+			cerr << "ファイルオープンに失敗しました" << endl;
+		}
+	}
+	catch (exception& e){
+		cerr << e.what() << endl;
+	}
+
+	return 0;
+}
+
