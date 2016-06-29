@@ -1,0 +1,21 @@
+#include "stdafx.h"
+#include <iostream>
+#include <map>
+using namespace std;
+int _tmain(int argc, _TCHAR* argv[]) {
+
+	map<std::string, int> fruits;
+
+	fruits["orange"] = 100;
+	fruits["apple"] = 90;
+	fruits["grape"] = 80;
+
+	for (auto a : fruits)
+	{
+		cout << a.first.c_str() << endl;
+		cout << a.second << endl;
+	}
+
+	return 0;
+}
+

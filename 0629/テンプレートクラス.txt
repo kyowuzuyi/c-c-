@@ -1,0 +1,35 @@
+#include "stdafx.h"
+#include <iostream>
+#include <map>
+using namespace std;
+
+// テンプレートクラス X には任意のクラスが入る
+// Xは別のアルファベットでもよい
+template <class X> X Max(X a, X b)
+{
+	return a > b ? a : b;
+}
+
+int _tmain(int argc, _TCHAR* argv[]) {
+
+	cout << Max(1, 2) << endl;	// Xはintに置き換え
+	cout << Max<double>(1, 2.5) << endl;	// Xは明示的にdouble
+	cout << Max(1.5, 2.5) << endl;	// Xはdoubleに置き換え
+
+	return 0;
+}
+//-----------------------------------------------------------
+
+template <class X> X* Max(X a)
+{
+	return &a;
+}
+
+int _tmain(int argc, _TCHAR* argv[]) {
+
+	int  x = 100;
+	cout << Max(x) << endl;
+
+	return 0;
+}
+

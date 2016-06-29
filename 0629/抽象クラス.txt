@@ -1,0 +1,25 @@
+#include "stdafx.h"
+#include <iostream>
+#include <map>
+using namespace std;
+// 抽象クラス（純粋仮想関数を持つクラス）
+class GameObject {
+public:
+	// 純粋仮想関数
+	virtual void move(int x) = 0;
+};
+class Player : public GameObject {
+	// シグニチャの同じmove関数を書かないとエラーになる
+	// void move() {}　エラー。シグニチャが違う
+	// シグニチャ（関数名、引数の型、引数の個数）
+	void move(int x) {}
+};
+
+int _tmain(int argc, _TCHAR* argv[]) {
+
+	//GameObject g; 抽象クラス自体のインスタンスは作成できない
+	Player a;
+
+	return 0;
+}
+

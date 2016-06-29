@@ -1,0 +1,22 @@
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+//仮想基本クラス
+class Base {
+public:
+	string name;
+};
+class D1 : virtual public Base{};
+class D2 : virtual public Base{};
+// c++は複数のbaseクラスを持てる（多重継承）
+// 多重継承はjavaでは禁止
+class D3 : public D1, public D2 {
+public:
+	void show() { cout << name.c_str() << endl; }
+};
+int _tmain(int argc, _TCHAR* argv[]) {
+	D3 d3; d3.name = "yamada"; // nameがエラー
+	d3.show();
+	return 0;
+}
+

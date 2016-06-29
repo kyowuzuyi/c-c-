@@ -1,0 +1,40 @@
+// ConsoleApplication1.cpp : コンソール アプリケーションのエントリ ポイントを定義します。
+//
+
+#include "stdafx.h"
+#include <iostream>
+using namespace std;
+
+//仮想関数
+class Base{
+public:
+	virtual void show(){
+		cout << "base" << endl;
+	}
+};
+
+class D1 : public Base{
+public:
+	void show(){
+		cout << "D1" << endl;
+	}
+};
+
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	Base a;
+	a.show();
+	D1 d1;
+	d1.show();
+	Base* p = new Base[2];
+	p[0] = a;
+	p[1] = d1;//base型だから、子供のD1を入れたら、base型のものだけ残って、子供のものなくなる
+	p[0].show();
+	p[1].show();
+
+	delete[] p;
+
+	return 0;
+}
+
