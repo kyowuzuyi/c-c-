@@ -1,0 +1,49 @@
+
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+using namespace std;
+class Node {
+public:
+	string name;
+	Node* left;
+	Node* right;
+	Node(string name) : name(name),left(nullptr),right(nullptr) {
+		cout << "constructor:" << name << endl;
+	}
+	~Node()
+	{
+		if (left != nullptr)
+		{
+			cout << "delete:" << left->name << endl;
+			delete left;
+			left = nullptr;
+		}
+		if (right != nullptr)
+		{
+			cout << "delete:" << right->name << endl;
+			delete right;
+			right = nullptr;
+		}
+		cout << "destructor:" << name << endl;
+	}
+};
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	Node* rootptr;
+
+	rootptr = new Node("root");
+	rootptr->left = new Node("left");
+	rootptr->right = new Node("right");
+
+	rootptr->left->left = new Node("ll");
+	rootptr->left->right = new Node("lr");
+	rootptr->right->left = new Node("rl");
+	rootptr->right->right = new Node("rr");
+
+	delete rootptr;
+
+	return 0;
+}
+

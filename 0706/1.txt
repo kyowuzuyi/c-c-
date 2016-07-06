@@ -1,0 +1,62 @@
+#include "stdafx.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node{
+	char e;
+	struct Node* Lchildren;
+	struct Node* Rchildren;
+};
+
+void Create(Node* &T){
+	char c = getchar();
+
+	if (c == 'o'){
+		T = NULL;
+	}
+	else
+	{
+		T = new Node;
+		T->e = c;
+		Create(T->Lchildren);
+		Create(T->Rchildren);
+	}
+}
+
+void Show(Node* T){
+	if (T == NULL) return;
+	else
+	{
+		printf(" %c ", T->e);
+		Show(T->Lchildren);
+		Show(T->Rchildren);
+	}
+}
+
+void Delete(Node* T){
+	if (T == nullptr) return;
+	else
+	{
+		printf(" %c ", T->e);
+		Delete(T->Lchildren);
+		Delete(T->Rchildren);
+	}
+	delete T;
+	T = nullptr;
+}
+
+void destroy(){
+
+
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	Node* t = (Node*)malloc(sizeof(Node));
+	Create(t);
+	Show(t);
+	Delete(t);
+
+	return 0;
+}
